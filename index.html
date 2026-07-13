@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SokHieng&Ratha-Wedding</title>
+    <meta property="og:title" content="សំបុត្រអញ្ជើញមង្គលការ - សុខអៀង & រដ្ឋា">
+    <meta property="og:description" content="សូមគោរពអញ្ជើញចូលរួមជាកិត្តិយសក្នុងពិធីសិរីមង្គលអាពាហ៍ពិពាហ៍ នៅថ្ងៃទី ២៩ ខែ មករា ឆ្នាំ ២០២៧">
+    <meta property="og:image" content="https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg">
+    <meta property="og:type" content="website">
+    <link href="https://fonts.googleapis.com/css2?family=Moul&family=Kantumruy+Pro:wght@400;700&family=Dangrek&display=swap" rel="stylesheet">
+
+    <style>
+        /* 1. Global Variables & Base Styles */
+        :root {
+            --rose: #c94b63;
+            --gold: #b8860b;
+            --bg: #fffcfc;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Kantumruy Pro', sans-serif;
+            scroll-behavior: smooth;
+            background: var(--bg);
+            overflow-x: hidden;
+        }
+
+        /* 2. Animations */
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .animate-pop {
+            opacity: 0;
+            display: block;
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes flyUpGlobal {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes fly {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+        }
+
+        @keyframes hR {
+            0% { transform: scale(0.8) rotate(-45deg); opacity: 0.5; }
+            100% { transform: scale(2.2) rotate(-45deg); opacity: 0; }
+        }
+
+        /* 3. Global Decorative Elements */
+        #global-flying-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .flying-element {
+            position: absolute;
+            bottom: -50px;
+            pointer-events: none;
+            opacity: 0;
+            animation: flyUpGlobal infinite linear;
+        }
+
+        .sparkle {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: fly 3s infinite linear;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        /* 4. Navigation & Controls */
+        .bottom-nav {
+            position: fixed;
+            bottom: 20px;
+            width: 94%;
+            left: 3%;
+            background: rgba(255, 255, 255, 0.98);
+            display: none;
+            justify-content: space-around;
+            padding: 10px 2px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(201, 75, 99, 0.2);
+            z-index: 1000;
+            border: 1px solid var(--gold);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--rose);
+            font-family: 'Dangrek';
+            font-size: 0.68rem;
+            text-align: center;
+            flex: 1;
+            cursor: pointer;
+        }
+
+        .nav-item span {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 2px;
+        }
+
+        .music-btn {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1001;
+            background: #fff;
+            border: 2px solid var(--rose);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* 5. Page Layouts */
+        .page-cover {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://lh3.googleusercontent.com/u/0/d/1OkzcnAAL7Z6O0b6nyHkw-IbRbBHTD4Le') no-repeat center;
+            background-size: cover;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+        }
+
+        .page-inside {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=2000') no-repeat center;
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll;
+            min-height: 100vh;
+            width: 100%;
+            padding: 25px 15px 120px 15px;
+            text-align: center;
+        }
+
+        /* 6. Components & Typography */
+        .curved-box { width: 100%; max-width: 500px; height: 90px; margin-top: -10px; }
+        .curved-text { font-family: 'Moul'; font-size: 38px; fill: var(--gold); filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1)); }
+        .curved-text-white { font-family: 'Moul'; font-size: 38px; fill: #ffd700; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+        .curved-text-en { font-family: 'Dangrek'; font-size: 42px; fill: var(--rose); }
+
+        .parents-row { display: flex; justify-content: center; width: 100%; max-width: 500px; margin: 0px auto 0; gap: 30px; }
+        .p-name { font-family: 'Moul'; font-size: 0.9rem; color: var(--rose); white-space: nowrap; text-shadow: 0.5px 0.5px 1px rgba(0,0,0,0.05); }
+
+        .invite-head { font-family: 'Dangrek'; font-size: 1.2rem; color: var(--rose); margin: 10px 0; width: 100%; }
+        .invite-body {
+            text-align: justify;
+            text-justify: inter-word;
+            text-indent: 40px;
+            font-family: 'Dangrek';
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #333;
+            max-width: 500px;
+            margin: 0 auto 15px auto;
+            padding: 0 5px;
+        }
+
+        .heart-wrap { position: relative; width: 70px; height: 65px; display: flex; align-items: center; justify-content: center; margin: 0 8px; }
+        .ripple {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--rose);
+            transform: rotate(-45deg);
+            opacity: 0;
+            animation: hR 2s infinite;
+            border-radius: 2px;
+        }
+        .ripple:before, .ripple:after { content: ""; width: 30px; height: 30px; background: inherit; border-radius: 50%; position: absolute; }
+        .ripple:before { top: -15px; left: 0; }
+        .ripple:after { left: 15px; top: 0; }
+
+        .main-h { width: 40px; height: 36px; background: var(--rose); position: relative; transform: rotate(-45deg); z-index: 10; }
+        .main-h:before, .main-h:after { content: ""; width: 40px; height: 36px; background: var(--rose); border-radius: 50%; position: absolute; }
+        .main-h:before { top: -20px; left: 0; }
+        .main-h:after { left: 20px; top: 0; }
+        .h-txt { transform: rotate(45deg); color: white; font-family: 'Dangrek'; font-size: 0.6rem; z-index: 20; position: relative; top: 10px; left: -1px; display: block; }
+
+        .info-card { font-family: 'Dangrek'; font-size: 1rem; line-height: 2.2; color: #222; width: 100%; max-width: 500px; margin: 0 auto; }
+        .line-wrap { display: block; white-space: nowrap; font-size: 0.88rem; }
+        .btn-open {
+            padding: 12px 35px;
+            background: linear-gradient(45deg, var(--rose), #ff85a2);
+            color: white;
+            border-radius: 50px;
+            border: 2px solid #fff;
+            font-family: 'Moul';
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(201, 75, 99, 0.4);
+            z-index: 100;
+            position: relative;
+        }
+        .section-title { font-family: 'Moul'; font-size: 0.8rem; color: var(--rose); margin-bottom: 15px; text-transform: uppercase; }
+
+        /* 7. Gallery System */
+        .gallery-container {
+            width: 100%;
+            height: 400px;
+            margin: 20px auto;
+            perspective: 2000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: visible;
+        }
+        .gallery {
+            width: 220px;
+            height: 300px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: translateX(0px);
+            transition: transform 1s;
+        }
+        .gallery img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 5px solid #fff;
+            box-shadow: 5px 5px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transform-origin: left center;
+            backface-visibility: hidden;
+            left: 0;
+            top: 0;
+        }
+
+        /* 8. Lightbox */
+        .lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            display: none; z-index: 2000;
+            justify-content: center; align-items: center;
+        }
+        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 8px; border: 3px solid white; }
+        .lb-close { position: absolute; top: 20px; right: 25px; color: white; font-size: 40px; cursor: pointer; }
+        .lb-prev, .lb-next {
+            position: absolute; top: 50%; color: white; font-size: 45px;
+            cursor: pointer; padding: 20px; transform: translateY(-50%);
+        }
+        .lb-prev { left: 0; }
+        .lb-next { right: 0; }
+
+        /* 9. Wish Section Components */
+        .wish-chip {
+            padding: 6px 12px;
+            background: #fff;
+            border: 1px solid var(--rose);
+            border-radius: 15px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            color: var(--rose);
+            font-family: 'Dangrek';
+            margin: 3px;
+        }
+
+        /* ================= NEW CLEAN CSS CLASSES (Refactored from Inline Styles) ================= */
+        .font-moul-large { font-family: 'Moul'; font-size: 1.8rem; margin: 5px 0; }
+        .font-dangrek-med { font-family: 'Dangrek'; font-size: 1.2rem; }
+        .guest-highlight { font-family: 'Moul'; font-size: 1.1rem; color: #ffd700; border-bottom: 2px solid #ffd700; margin-bottom: 25px; }
+        .small-label { font-size: 0.7rem; }
+        .couple-container { display: flex; align-items: center; justify-content: center; margin: 15px 0; }
+        .groom-bride-block { text-align: center; }
+        .groom-bride-label { font-family: 'Dangrek'; color: var(--gold); font-size: 0.85rem; }
+        .groom-bride-label-en { font-family: 'Dangrek'; color: var(--gold); font-size: 0.8rem; }
+        .groom-bride-name-inside { font-size: 1.1rem; }
+        .rose-text { color: var(--rose); }
+        .bold-rose-line { color: var(--rose); font-weight: bold; }
+        .grey-text { color: #555; }
+        .gold-text { color: var(--gold); }
+        .divider-dash { margin-top: 40px; border-top: 1px dashed var(--gold); padding-top: 20px; width: 100%; }
+        .save-date-container { margin: 40px auto; width: 100%; max-width: 480px; text-align: center; border-top: 1px dashed #b8860b; padding-top: 30px; }
+        .save-date-title { font-family: 'Moul'; font-size: 0.8rem; color: #c94b63; margin-bottom: 15px; }
+        .btn-calendar { display: inline-block; margin-bottom: 30px; padding: 12px 25px; background: #34a853; color: white; text-decoration: none; border-radius: 50px; font-family: 'Dangrek'; font-size: 0.9rem; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .wish-box { background: white; padding: 25px; border-radius: 20px; border: 1px solid #b8860b; box-shadow: 0 5px 20px rgba(0,0,0,0.05); text-align: left; }
+        .wish-box-title { font-family: 'Moul'; font-size: 0.8rem; color: #c94b63; margin-bottom: 15px; text-align: center; }
+        .wish-box-label { font-family: 'Dangrek'; font-size: 0.8rem; color: #c94b63; }
+        .wish-input-text { width: 100%; padding: 12px; margin: 5px 0 15px 0; border-radius: 10px; border: 1px solid #ddd; font-family: 'Kantumruy Pro'; }
+        .wish-select { width: 100%; padding: 12px; margin: 5px 0 15px 0; border-radius: 10px; border: 1px solid #b8860b; font-family: 'Dangrek'; background: white; }
+        .wish-chips-wrap { display: flex; flex-wrap: wrap; justify-content: center; margin: 5px 0 10px 0; }
+        .wish-textarea { width: 100%; height: 80px; padding: 12px; border-radius: 10px; border: 1px solid #ddd; font-family: 'Kantumruy Pro'; margin-bottom: 20px; }
+        .btn-submit { width: 100%; padding: 15px; background: linear-gradient(45deg, #c94b63, #ff85a2); color: white; border-radius: 50px; border: 2px solid #fff; font-family: 'Moul'; cursor: pointer; box-shadow: 0 4px 15px rgba(201, 75, 99, 0.4); transition: all 0.3s ease; }
+        .wall-container { margin-top: 20px; text-align: left; }
+        .section-map-container { margin-top: 40px; width: 100%; }
+        .map-card { background: white; padding: 15px; border-radius: 15px; border: 1px solid var(--gold); max-width: 480px; margin: 0 auto; }
+        .btn-map { display: inline-block; padding: 10px 25px; background: var(--gold); color: white; text-decoration: none; border-radius: 20px; font-family: 'Dangrek'; }
+        .timer-container { margin-top: 40px; }
+        .timer-flex { display: flex; justify-content: center; gap: 8px; }
+        .timer-item { background: white; padding: 10px; border-radius: 10px; border: 1px solid var(--gold); min-width: 60px; }
+        .timer-num { font-family: 'Dangrek'; font-size: 1.2rem; color: var(--rose); }
+        .gallery-section { margin-top: 40px; width: 100%; }
+        .wish-post-item { background: #fff5f6; padding: 8px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid var(--rose); font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <div id="global-flying-container"></div>
+    
+    <audio id="music" loop preload="auto">
+        <source src="https://github.com/EEEfree-star/Wedding-invitation/raw/refs/heads/main/Music03.mp3" type="audio/mpeg">
+    </audio>
+    <div class="music-btn" onclick="toggleM()">🔊</div>
+
+    <div class="bottom-nav" id="menu">
+        <a onclick="goBack()" class="nav-item"><span>🏠</span>ត្រឡប់ដើម</a>
+        <a href="#section-main" class="nav-item"><span>📅</span>កម្មវិធី</a>
+        <a href="#section-map" class="nav-item"><span>📍</span>ទីតាំង</a>
+        <a href="#section-timer" class="nav-item"><span>⏳</span>រាប់ថយក្រោយ</a>
+        <a href="#section-gallery" class="nav-item"><span>🖼️</span>រូបថត</a>
+        <a href="#section-wish" class="nav-item"><span>✍️</span>សារជូនពរ</a>
+    </div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="lb-close" onclick="closeLB()">×</span>
+        <span class="lb-prev" onclick="changeImg(-1)">❮</span>
+        <img id="lb-img" src="" alt="Zoom Image">
+        <span class="lb-next" onclick="changeImg(1)">❯</span>
+    </div>
+
+    <div class="page-cover" id="cover">
+        <div id="sparkle-container"></div>
+        
+        <svg class="curved-box animate-pop" viewBox="0 0 500 150">
+            <path id="p1" d="M 50,140 Q 250,10 450,140" fill="transparent" />
+            <text class="curved-text-white">
+                <textPath xlink:href="#p1" startOffset="50%" text-anchor="middle">សិរីសួស្តីអាពាហ៍ពិពាហ៍</textPath>
+            </text>
+        </svg>
+
+        <div class="animate-pop font-moul-large">សុខអៀង ❤️ រដ្ឋា</div>
+        <div class="animate-pop font-dangrek-med">សូមគោរពអញ្ជើញ</div>
+        
+        <div class="animate-pop guest-highlight">
+            <span id="guest-display">ឯកឧត្តម លោកជំទាវ លោក លោកស្រី</span>
+        </div>
+
+        <button class="btn-open animate-pop" onclick="unlock()">បើកសំបុត្រអញ្ជើញ</button>
+    </div>
+
+    <div class="page-inside" id="inside">
+        
+        <div id="section-main"></div>
+        
+        <svg class="curved-box animate-pop" viewBox="0 0 500 150">
+            <path id="p2" d="M 50,140 Q 250,10 450,140" fill="transparent" />
+            <text class="curved-text">
+                <textPath xlink:href="#p2" startOffset="50%" text-anchor="middle">សិរីសួស្តីអាពាហ៍ពិពាហ៍</textPath>
+            </text>
+        </svg>
+
+        <div class="parents-row animate-pop">
+            <div class="p-group">
+                <span class="small-label"></span> <span class="p-name"></span><br>
+                <span class="small-label">លោកស្រី</span> <span class="p-name">ផូ យ៉ម</span>
+            </div>
+            <div class="p-group">
+                <span class="small-label">លោក</span> <span class="p-name">ឃឹម សាវឿន</span><br>
+                <span class="small-label">លោកស្រី</span> <span class="p-name">ស៊ុំ សារឿង</span>
+            </div>
+        </div>
+
+        <div class="invite-head animate-pop">យើងខ្ញុំមានកិត្តិយសសូមគោរពអញ្ជើញ</div>
+        <div class="invite-body animate-pop">
+            ឯកឧត្តម លោកឧកញ៉ា លោកជំទាវ លោក លោកស្រី អ្នកនាងកញ្ញា និងប្រិយមិត្ត អញ្ជើញចូលរួមជាភ្ញៀវកិត្តិយស ដើម្បីប្រសិទ្ធពរជ័យ សិរីសួស្តី ជ័យមង្គលក្នុងពិធីសិរីមង្គលអាពាហ៍ពិពាហ៍កូនប្រុស កូនស្រីរបស់យើងខ្ញុំ។
+        </div>
+
+        <div class="animate-pop couple-container">
+            <div class="groom-bride-block">
+                <span class="groom-bride-label">កូនប្រុសនាម</span><br>
+                <span class="p-name groom-bride-name-inside">ឈៀង សុខអៀង</span>
+            </div>
+            <div class="heart-wrap">
+                <div class="ripple"></div>
+                <div class="main-h"><span class="h-txt">ជាគូនឹង</span></div>
+            </div>
+            <div class="groom-bride-block">
+                <span class="groom-bride-label">កូនស្រីនាម</span><br>
+                <span class="p-name groom-bride-name-inside">លន រដ្ឋា</span>
+            </div>
+        </div>
+
+        <div class="info-card animate-pop">
+            និងពិសារភោជនីអាហារដែលប្រព្រឹត្តទៅនៅ<br>
+            <span class="line-wrap rose-text">ថ្ងៃ សុក្រ ៧រោច ខែ បុស្ស ឆ្នាំ មមី អដ្ឋស័ក ព.ស ២៥៧០</span>
+            <span class="line-wrap rose-text">ត្រូវនឹងថ្ងៃទី ២៩ ខែ មករា ឆ្នាំ ២០២៧ វេលាម៉ោង ៥:០០ ល្ងាច</span>
+            នៅគេហដ្ឋានខាងស្រី ស្ថិតនៅភូមិ ថ្មគរ ឃុំ ថ្មគរ ស្រុក ល្វាឯម ខេត្ត កណ្តាល
+        </div>
+
+        <div class="divider-dash">
+            <svg class="curved-box" viewBox="0 0 500 150">
+                <path id="p3" d="M 50,140 Q 250,10 450,140" fill="transparent" />
+                <text class="curved-text-en">
+                    <textPath xlink:href="#p3" startOffset="50%" text-anchor="middle">Wedding Invitation</textPath>
+                </text>
+            </svg>
+            
+            <div class="parents-row">
+                <div class="p-group"><span class="small-label"></span> <span class="p-name" style="font-family:'Dangrek';"></span><br><span class="small-label">Mrs.</span> <span class="p-name" style="font-family:'Dangrek';">Pho Yom</span></div>
+                <div class="p-group"><span class="small-label">Mr.</span> <span class="p-name" style="font-family:'Dangrek';">Khim Savoeun</span><br><span class="small-label">Mrs.</span> <span class="p-name" style="font-family:'Dangrek';">Sum Saroeng</span></div>
+            </div>
+
+            <div class="invite-head" style="text-align: center; font-size: 1rem;">We have the honor and pleasure to invite</div>
+            <div class="invite-body" style="text-align:center; text-indent:0; font-size: 0.95rem;">
+                Excellencies, Lok Oknha, Lok Chumteav, Ladies and Gentlemen, and all beloved friends to the wedding ceremony of our children.
+            </div>
+
+            <div class="couple-container">
+                <div class="groom-bride-block"><span class="groom-bride-label-en">The Groom</span><br><span class="p-name groom-bride-name-inside" style="font-family:'Dangrek';">Chhieng SokHieng</span></div>
+                <div class="heart-wrap"><div class="ripple"></div><div class="main-h"><span class="h-txt">And</span></div></div>
+                <div class="groom-bride-block"><span class="groom-bride-label-en">The Bride</span><br><span class="p-name groom-bride-name-inside" style="font-family:'Dangrek';">Lorn Ratha</span></div>
+            </div>
+
+            <div class="info-card" style="text-align: center; font-size: 0.95rem;">
+                The wedding celebration and reception will be held on:<br>
+                <span class="line-wrap bold-rose-line">Friday, January 29th, 2027</span>
+                <span class="line-wrap bold-rose-line">Starting from 5:00 PM onwards</span>
+                <div class="grey-text" style="margin-top: 10px;">
+                    Located at the <span class="gold-text">Bride's Residence</span><br>
+                    Thmor Kor Village, Lvea Aem District, Kandal Province
+                </div>
+            </div>
+            <div class="rose-text" style="font-family:'Dangrek'; margin-top: 15px; font-size: 0.9rem;">With warm regards and friendship.</div>
+        </div>
+
+        <div class="save-date-container">
+            <div class="save-date-title">រក្សាទុកកាលបរិច្ឆេទ | SAVE THE DATE</div>
+            
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding+of+Ravy+and+Somnea&dates=20280107T100000Z/20280107T150000Z&details=សូមអញ្ជើញចូលរួមមង្គលការ+ឈៀង+សុខអៀង+និង+លន+រដ្ឋា&location=Lvea+Aem,+Kandal" 
+                target="_blank" class="btn-calendar">
+                📅 រក្សាទុកក្នុងប្រតិទិន (Google Calendar)
+            </a>
+
+            <div id="section-wish" class="wish-box">
+                <div class="wish-box-title">បញ្ជាក់ការចូលរួម និង សារជូនពរ</div>
+                
+                <label class="wish-box-label">ឈ្មោះរបស់អ្នក៖</label>
+                <input type="text" id="g-name" placeholder="ឈ្មោះរបស់អ្នក..." class="wish-input-text">
+
+                <label class="wish-box-label">ស្ថានភាព៖</label>
+                <select id="rsvp-status-new" class="wish-select">
+                    <option value="yes">បាទ/ចាស នឹងមកចូលរួម</option>
+                    <option value="no">សោកស្តាយ មិនអាចមកបានទេ</option>
+                    <option value="maybe">មិនទាន់ច្បាស់</option>
+                </select>
+
+                <label class="wish-box-label">ចំនួនអ្នកមកជាមួយ៖</label>
+                <input type="number" id="guest-count-new" class="wish-input-text" placeholder="ឧទាហរណ៍៖ ២">
+                
+                <label class="wish-box-label">សារជូនពរ៖</label>
+                <div class="wish-chips-wrap">
+                    <div class="wish-chip" onclick="setW('សូមឱ្យស្រឡាញ់គ្នាដល់ចាស់កោងខ្នង! ❤️')">ដល់ចាស់កោងខ្នង</div>
+                    <div class="wish-chip" onclick="setW('សូមឱ្យមានសុភមង្គលជានិរន្តរ៍! ✨')">មានសុភមង្គល</div>
+                    <div class="wish-chip" onclick="setW('សូមគោរពអបអរសាទរយ៉ាងកក់ក្តៅ! ✨')">អបអរសាទរ</div>
+                </div>
+                
+                <textarea id="w-msg" placeholder="សរសេរពាក្យជូនពរនៅទីនេះ..." class="wish-textarea"></textarea>
+
+                <button id="submit-btn" onclick="sendToSheet('សូមអរគុណសម្រាប់ការបញ្ជាក់ និងសារជូនពរ!')" class="btn-submit">
+                    ផ្ញើទិន្នន័យឥឡូវនេះ
+                </button>
+                <div id="wall" class="wall-container"></div>
+            </div>
+        </div>
+
+        <div id="section-map" class="section-map-container">
+            <div class="section-title">ទីតាំងកម្មវិធី | LOCATION</div>
+            <div class="map-card">
+                <p style="font-family:'Dangrek'; font-size:0.9rem;">ចុចទីនេះដើម្បីមើលផែនទីហ្គូហ្គល</p>
+                <a href="https://maps.google.com/?q=11.515094, 105.098145" target="_blank" class="btn-map">📍 Open Google Maps</a>
+            </div>
+        </div>
+
+        <div id="section-timer" class="timer-container">
+            <div class="section-title">រាប់ថយក្រោយ | COUNTDOWN</div>
+            <div id="timer-display-box" class="timer-flex">
+                <div class="timer-item"><span id="d" class="timer-num">0</span><br><small>Days</small></div>
+                <div class="timer-item"><span id="h" class="timer-num">0</span><br><small>Hrs</small></div>
+                <div class="timer-item"><span id="m" class="timer-num">0</span><br><small>Mins</small></div>
+                <div class="timer-item"><span id="s" class="timer-num">0</span><br><small>Secs</small></div>
+            </div>
+        </div>
+
+        <div id="section-gallery" class="gallery-section">
+            <div class="section-title">រូបថតអនុស្សាវរីយ៍ | GALLERY</div>
+            <div class="gallery-container">
+                <div class="gallery" id="flip-gallery">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1OkzcnAAL7Z6O0b6nyHkw-IbRbBHTD4Le" alt="Gallery 1">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/145TpedeHjQr2LrCPvv42Dq7cDhMt7xNz" alt="Gallery 2">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1kDrJrDyyu1Bbv9mx4pYkzfrod_34zdr_" alt="Gallery 3">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1iwQxVTFGEuD46PS9DYTup2cj4rXl_skV" alt="Gallery 4">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1euMWQz27nJ9dxGsmN3rBVb_MGBlwB6Jc" alt="Gallery 5">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1F_nnMUT7I32w5s5REgqyfofTafkybv_J?w=600" alt="Gallery 6">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1nIYySe_dKiGZf73hdmA4RMCWO7jvLr6j?w=600" alt="Gallery 7">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1JpmiY2T-s3V6kcA_RcvTRe5LtWKUVKi2?w=600" alt="Gallery 8">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1lePBvPmZJXPUkw7C3A9UX7YpdYtX1aMr?w=600" alt="Gallery 9">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1jd6P5tviseyNNSJ34uETYSA2rD-h95nJ?w=600" alt="Gallery 10">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1adEXBstf_MU3sYAbX5qCj3dT8nf-8l3y?w=600" alt="Gallery 11">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1tVcf5MaduES_NrUDRyc9-n3XdUNfD6MS?w=600" alt="Gallery 12">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1T279GE1hv-diaf26tr7rr_ff3FlTTBjx?w=600" alt="Gallery 13">
+                </div>
+            </div>
+            <p style="font-family:'Dangrek'; font-size:0.8rem; color:var(--gold);">* ចុចលើរូបដើម្បីមើលធំ</p>
+        </div>
+
+    </div>
+
+    <script>
+        const audio = document.getElementById('music');
+        const targetDate = new Date("2027-01-29T17:00:00+07:00").getTime();
+        let currentImgIndex = 0;
+        const galleryImages = [];
+        let countdownInterval;
+
+        /* Initialization */
+        function initEffects() {
+            createGlobalFlyingElements();
+            createSparkles();
+            initFlipBook(); 
+        }
+
+        /* Decorative Background Elements (Optimized DOM count to 20 for Performance) */
+        function createGlobalFlyingElements() {
+            const container = document.getElementById('global-flying-container');
+            const icons = ['❤️', '🌸', '✨', '💍', '💖'];
+            for (let i = 0; i < 20; i++) {
+                const el = document.createElement('div');
+                el.className = 'flying-element';
+                el.innerText = icons[Math.floor(Math.random() * icons.length)];
+                el.style.left = Math.random() * 100 + 'vw';
+                el.style.fontSize = (Math.random() * 1.2 + 0.8) + 'rem';
+                el.style.animationDuration = (Math.random() * 6 + 4) + 's';
+                el.style.animationDelay = Math.random() * 8 + 's';
+                if(Math.random() > 0.5) el.style.color = 'var(--rose)';
+                container.appendChild(el);
+            }
+        }
+
+        function createSparkles() {
+            const container = document.getElementById('sparkle-container');
+            if(!container) return;
+            for (let i = 0; i < 15; i++) {
+                let s = document.createElement('div');
+                s.className = 'sparkle';
+                let size = Math.random() * 5 + 2 + 'px';
+                s.style.width = size; s.style.height = size;
+                s.style.left = Math.random() * 100 + 'vw';
+                s.style.top = Math.random() * 100 + 'vh';
+                s.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(s);
+            }
+        }
+
+        /* Gallery Functions */
+        function initFlipBook() {
+            const gallery = document.getElementById('flip-gallery');
+            const imgs = gallery.querySelectorAll('img');
+            let currentPage = 0;
+
+            imgs.forEach((img, index) => {
+                galleryImages.push(img.src);
+                img.style.zIndex = imgs.length - index;
+                img.onclick = (e) => {
+                    e.stopPropagation();
+                    openLB(index);
+                };
+            });
+
+            setInterval(() => {
+                if (currentPage < imgs.length - 1) {
+                    imgs[currentPage].style.transform = "rotateY(-145deg)";
+                    currentPage++;
+                } else {
+                    imgs.forEach((img, idx) => {
+                        setTimeout(() => {
+                            img.style.transform = "rotateY(0deg)";
+                        }, (imgs.length - idx) * 100);
+                    });
+                    currentPage = 0;
+                }
+            }, 3000);
+        }
+
+        function openLB(index) {
+            currentImgIndex = index;
+            document.getElementById('lb-img').src = galleryImages[currentImgIndex];
+            document.getElementById('lightbox').style.display = 'flex';
+        }
+
+        function closeLB() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        function changeImg(step) {
+            currentImgIndex += step;
+            if (currentImgIndex >= galleryImages.length) currentImgIndex = 0;
+            if (currentImgIndex < 0) currentImgIndex = galleryImages.length - 1;
+            document.getElementById('lb-img').src = galleryImages[currentImgIndex];
+        }
+
+        /* Core Controls */
+        function toggleM() { 
+            audio.muted = !audio.muted; 
+            document.querySelector('.music-btn').innerText = audio.muted ? "🔇" : "🔊"; 
+        }
+
+        function unlock() { 
+            audio.play().catch(e => console.log("Audio play failed:", e)); 
+            document.getElementById('cover').style.display = 'none';
+            document.getElementById('inside').style.display = 'flex';
+            document.getElementById('menu').style.display = 'flex';
+            window.scrollTo(0, 0);
+        }
+
+        function goBack() {
+            document.getElementById('inside').style.display = 'none';
+            document.getElementById('menu').style.display = 'none';
+            document.getElementById('cover').style.display = 'flex';
+            window.scrollTo(0, 0);
+        }
+
+        /* Guest Management */
+        function getGuestName() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const guestName = urlParams.get('n'); 
+            if (guestName) {
+                const displayEl = document.getElementById('guest-display');
+                if (displayEl) displayEl.innerText = guestName;
+                const nameInput = document.getElementById('g-name');
+                if (nameInput) nameInput.value = guestName;
+            }
+        }
+
+        /* RSVP & Google Sheets */
+        function sendToSheet(message) {
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbxZY2f1KjbgqFXdFEkkZYO9R29hO9ibQdE_YaL4gL6Ut9I-RdJU0aQOwcfSk60Pfr9F/exec'; 
+            const name = document.getElementById('g-name').value || "ភ្ញៀវកិត្តិយស";
+            const status = document.getElementById('rsvp-status-new').value;
+            const guests = document.getElementById('guest-count-new').value || 0;
+            const wish = document.getElementById('w-msg').value;
+            const btn = document.getElementById('submit-btn');
+
+            if (!document.getElementById('g-name').value) {
+                alert("សូមមេត្តាបំពេញឈ្មោះរបស់អ្នក!");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = "កំពុងផ្ញើ... ⏳";
+            btn.style.opacity = "0.7";
+            btn.style.cursor = "not-allowed";
+
+            const finalURL = `${scriptURL}?name=${encodeURIComponent(name)}&status=${encodeURIComponent(status)}&guests=${encodeURIComponent(guests)}&wish=${encodeURIComponent(wish)}`;
+
+            fetch(finalURL, { mode: 'no-cors' })
+            .then(() => {
+                alert(message);
+                if (wish) postW(); 
+                
+                btn.innerText = "ផ្ញើរួចរាល់ ✓";
+                btn.style.background = "#34a853";
+                btn.style.opacity = "1";
+            })
+            .catch(error => {
+                console.error('Error!', error.message);
+                alert('មានបញ្ហា! សូមព្យាយាមម្តងទៀត។');
+                
+                btn.disabled = false;
+                btn.innerText = "ផ្ញើទិន្នន័យឥឡូវនេះ";
+                btn.style.opacity = "1";
+                btn.style.cursor = "pointer";
+            });
+        }
+
+        function setW(t) { document.getElementById('w-msg').value = t; }
+        
+        /* Fixed XSS Vulnerability using textContent instead of innerHTML */
+        function postW() {
+            const name = document.getElementById('g-name').value || "ភ្ញៀវកិត្តិយស";
+            const msg = document.getElementById('w-msg').value;
+            if(!msg) return;
+            
+            const d = document.createElement('div');
+            d.className = "wish-post-item";
+            
+            const strong = document.createElement('strong');
+            strong.textContent = name + ": ";
+            
+            const txt = document.createTextNode(msg);
+            
+            d.appendChild(strong);
+            d.appendChild(txt);
+            
+            document.getElementById('wall').prepend(d);
+            document.getElementById('w-msg').value = "";
+        }
+
+        /* Timer Logic with end state condition */
+        countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            
+            if(diff > 0) {
+                document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            } else {
+                clearInterval(countdownInterval);
+                const timerContainer = document.getElementById('section-timer');
+                if (timerContainer) {
+                    timerContainer.innerHTML = "<div class='section-title'>កម្មវិធីបានចាប់ផ្តើមហើយ! 🎉</div>";
+                }
+            }
+        }, 1000);
+
+        /* Window Load */
+        window.onload = function() {
+            initEffects();
+            getGuestName();
+        };
+    </script>
+</body>
+</html>
