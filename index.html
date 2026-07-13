@@ -6,7 +6,8 @@
     <title>SokHieng&Ratha-Wedding</title>
     <meta property="og:title" content="សំបុត្រអញ្ជើញមង្គលការ - សុខអៀង & រដ្ឋា">
     <meta property="og:description" content="សូមគោរពអញ្ជើញចូលរួមជាកិត្តិយសក្នុងពិធីសិរីមង្គលអាពាហ៍ពិពាហ៍ នៅថ្ងៃទី ២៩ ខែ មករា ឆ្នាំ ២០២៧">
-    <meta property="og:image" content="https://images.pexels.com/photos/2253870/pexels-photo-2253870.jpeg">
+    <!-- 1. កែប្រែរូបភាពសម្រាប់ Share លីង (កុំឱ្យលីងទទេរ) -->
+    <meta property="og:image" content="https://lh3.googleusercontent.com/u/0/d/1OkzcnAAL7Z6O0b6nyHkw-IbRbBHTD4Le">
     <meta property="og:type" content="website">
     <link href="https://fonts.googleapis.com/css2?family=Moul&family=Kantumruy+Pro:wght@400;700&family=Dangrek&display=swap" rel="stylesheet">
 
@@ -298,7 +299,25 @@
         /* ================= NEW CLEAN CSS CLASSES (Refactored from Inline Styles) ================= */
         .font-moul-large { font-family: 'Moul'; font-size: 1.8rem; margin: 5px 0; }
         .font-dangrek-med { font-family: 'Dangrek'; font-size: 1.2rem; }
-        .guest-highlight { font-family: 'Moul'; font-size: 1.1rem; color: #ffd700; border-bottom: 2px solid #ffd700; margin-bottom: 25px; }
+        
+        /* 3. កែប្រែស៊ុមឈ្មោះភ្ញៀវឱ្យស្រស់ស្អាត */
+        .guest-name-box {
+            display: inline-block;
+            padding: 10px 25px;
+            border: 2px solid #ffd700; /* ស៊ុមពណ៌មាស */
+            border-radius: 15px;       /* ជ្រុងមូល */
+            background-color: rgba(255, 215, 0, 0.1); /* ពណ៌ផ្ទៃខាងក្រោយមាសស្រាលៗ */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);     /* ស្រមោល */
+            margin-bottom: 25px;
+        }
+        
+        .guest-highlight { 
+            font-family: 'Moul'; 
+            font-size: 1.1rem; 
+            color: #ffd700; 
+            margin: 0;
+        }
+
         .small-label { font-size: 0.7rem; }
         .couple-container { display: flex; align-items: center; justify-content: center; margin: 15px 0; }
         .groom-bride-block { text-align: center; }
@@ -371,8 +390,9 @@
         <div class="animate-pop font-moul-large">សុខអៀង ❤️ រដ្ឋា</div>
         <div class="animate-pop font-dangrek-med">សូមគោរពអញ្ជើញ</div>
         
-        <div class="animate-pop guest-highlight">
-            <span id="guest-display">ឯកឧត្តម លោកជំទាវ លោក លោកស្រី</span>
+        <!-- បន្ថែម class guest-name-box ដើម្បីដាក់ស៊ុម -->
+        <div class="animate-pop guest-name-box">
+            <h1 id="guest-display" class="guest-highlight">ឯកឧត្តម លោកជំទាវ លោក លោកស្រី</h1>
         </div>
 
         <button class="btn-open animate-pop" onclick="unlock()">បើកសំបុត្រអញ្ជើញ</button>
@@ -662,8 +682,12 @@
         /* Guest Management */
         function getGuestName() {
             const urlParams = new URLSearchParams(window.location.search);
-            const guestName = urlParams.get('n'); 
+            let guestName = urlParams.get('n'); 
+            
             if (guestName) {
+                // 2. ធ្វើឱ្យឈ្មោះដកឃ្លាបាន (ប្តូរ _ ឬ %20 មកជាលំហទទេរ)
+                guestName = decodeURIComponent(guestName).replace(/_/g, ' ');
+
                 const displayEl = document.getElementById('guest-display');
                 if (displayEl) displayEl.innerText = guestName;
                 const nameInput = document.getElementById('g-name');
