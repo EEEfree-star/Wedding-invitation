@@ -58,11 +58,6 @@
             100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
         }
 
-        @keyframes hR {
-            0% { transform: scale(0.8) rotate(-45deg); opacity: 0.5; }
-            100% { transform: scale(2.2) rotate(-45deg); opacity: 0; }
-        }
-
         /* 3. Global Decorative Elements */
         #global-flying-container {
             position: fixed;
@@ -142,26 +137,88 @@
             cursor: pointer;
         }
 
-        /* 5. Page Layouts (Background URLs can be changed here) */
+        /* 5. Page Layouts (រចនាបថទំព័រទី១ ឱ្យដូចទំព័រទី២) */
+ /* ✅ កូដថ្មីដែលត្រូវដាក់ជំនួស (ធ្វើឱ្យរូបពេញ Screen ស្វ័យប្រវត្តិ) */
+
         .page-cover {
             height: 100vh;
+            height: 100dvh;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://lh3.googleusercontent.com/u/0/d/1OkzcnAAL7Z6O0b6nyHkw-IbRbBHTD4Le') no-repeat center;
+            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), 
+                        url('https://lh3.googleusercontent.com/u/0/d/1BiMXeaalYRS4ifhUm2OhK3Z9lpShc7M4') no-repeat center;
             background-size: cover;
-            color: white;
-            text-align: center;
-            padding: 10px;
+            padding: 15px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .cover-card-item {
+            width: 100%;
+            max-width: 450px;
+            height: 78vh;
+            height: 78dvh;
+            background: #ffffff;
+            padding: 8px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border: 1px solid var(--gold);
             position: relative;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cover-card-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .invitation-cards-wrapper {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .invitation-card-item {
+            width: 100%;
+            height: 90vh;
+            height: 90dvh;
+            background: #ffffff;
+            padding: 8px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid var(--gold);
+            position: relative;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .invitation-card-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
         }
 
         .page-inside {
             display: none;
             flex-direction: column;
             align-items: center;
-            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), url('https://lh3.googleusercontent.com/u/0/d/1BiMXeaalYRS4ifhUm2OhK3Z9lpShc7M4') no-repeat center;
+            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('https://lh3.googleusercontent.com/u/0/d/1BiMXeaalYRS4ifhUm2OhK3Z9lpShc7M4') no-repeat center;
             background-size: cover;
             background-position: center;
             background-attachment: scroll;
@@ -171,10 +228,7 @@
             text-align: center;
         }
 
-        /* 6. Components & Typography */
-        .curved-box { width: 100%; max-width: 500px; height: 90px; margin-top: -10px; }
-        .curved-text-white { font-family: 'Moul'; font-size: 38px; fill: #ffd700; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
-
+        /* 6. Buttons & Components */
         .btn-open {
             padding: 12px 35px;
             background: linear-gradient(45deg, var(--rose), #ff85a2);
@@ -186,10 +240,49 @@
             box-shadow: 0 4px 15px rgba(201, 75, 99, 0.4);
             z-index: 100;
             position: relative;
+	    /*margin-top: -95px;  👈 បន្ថែមជួរនេះដើម្បីទាញប៊ូតុងឡើងលើប្រហែល 1cm */
         }
         .section-title { font-family: 'Moul'; font-size: 0.8rem; color: var(--rose); margin-bottom: 15px; text-transform: uppercase; }
 
-        /* 7. Gallery System */
+        /* 7. Separate Card Layouts for Page Inside */
+        .invitation-cards-wrapper {
+            width: 100%;
+            max-width: 480px;
+            margin: 0px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .invitation-card-item {
+            width: 100%;
+            height: auto;               /* 👈 ប្តូរពី 90dvh មកជា auto វិញ */
+            background: #ffffff;
+            padding: 8px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 1px solid var(--gold);
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .invitation-card-item img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;     /* 👈 បង្ហាញរូបពេញ មិនដាច់ជាយឡើយ */
+	    border-radius: 12px;
+            display: block;
+        }
+
+        .card-divider {
+            width: 60%;
+            margin: 0 auto;
+            border: 0;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold), transparent);
+        }
+
+        /* 8. Gallery System */
         .gallery-container {
             width: 100%;
             height: 400px;
@@ -224,7 +317,7 @@
             top: 0;
         }
 
-        /* 8. Lightbox */
+        /* 9. Lightbox */
         .lightbox {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95);
@@ -240,7 +333,7 @@
         .lb-prev { left: 0; }
         .lb-next { right: 0; }
 
-        /* 9. Wish Section Components */
+        /* 10. Wish Section Components */
         .wish-chip {
             padding: 6px 12px;
             background: #fff;
@@ -253,25 +346,24 @@
             margin: 3px;
         }
 
-        /* ================= CLEAN CSS CLASSES ================= */
-        .font-moul-large { font-family: 'Moul'; font-size: 1.8rem; margin: 5px 0; }
-        .font-dangrek-med { font-family: 'Dangrek'; font-size: 1.2rem; }
-        
+        /* ================= GUEST NAME POSITIONING ================= */
         .guest-name-box {
-            display: inline-block;
-            padding: 10px 25px;
-            border: 2px solid #ffd700;
-            border-radius: 15px;
-            background-color: rgba(255, 215, 0, 0.1);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            margin-bottom: 25px;
+            position: absolute;  
+            left: 50%;           
+            transform: translateX(-50%); 
+            top: 69%;            /* កែប្រែ % ត្រង់នេះដើម្បីរំកិលឈ្មោះភ្ញៀវចុះក្រោម/ឡើងលើ */
+            width: 80%;          
+            text-align: center;
+            z-index: 10;
         }
         
         .guest-highlight { 
-            font-family: 'Moul'; 
-            font-size: 1.1rem; 
-            color: #ffd700; 
+            font-family: 'Moul', cursive; 
+            font-size: 1.0rem;   
+            color: #b8860b;      
             margin: 0;
+            line-height: 1.4;
+            text-shadow: none;   
         }
 
         .save-date-container { margin: 40px auto; width: 100%; max-width: 480px; text-align: center; border-top: 1px dashed #b8860b; padding-top: 30px; }
@@ -322,35 +414,44 @@
         <span class="lb-next" onclick="changeImg(1)">❯</span>
     </div>
 
+    <!-- Cover Page (ទម្រង់ Card ដូចទំព័រទី២) -->
     <div class="page-cover" id="cover">
         <div id="sparkle-container"></div>
         
-        <svg class="curved-box animate-pop" viewBox="0 0 500 150">
-            <path id="p1" d="M 50,140 Q 250,10 450,140" fill="transparent" />
-            <text class="curved-text-white">
-                <textPath xlink:href="#p1" startOffset="50%" text-anchor="middle">សិរីសួស្តីអាពាហ៍ពិពាហ៍</textPath>
-            </text>
-        </svg>
-
-        <div class="animate-pop font-moul-large">សុខអៀង ❤️ រដ្ឋា</div>
-        <div class="animate-pop font-dangrek-med">សូមគោរពអញ្ជើញ</div>
-        
-        <div class="animate-pop guest-name-box">
-            <h1 id="guest-display" class="guest-highlight">ឯកឧត្តម លោកជំទាវ លោក លោកស្រី</h1>
+        <div class="cover-card-item animate-pop">
+            <!-- រូបភាព Cover មេ -->
+            <img src="https://lh3.googleusercontent.com/u/0/d/1m2SF1w-oTZb9j8QehWIcjaw0SdS_ctWN" alt="Wedding Invitation Cover">
+            
+            <!-- ឈ្មោះភ្ញៀវស្ថិតនៅលើរូបភាព Cover -->
+            <div class="guest-name-box">
+                <h1 id="guest-display" class="guest-highlight">ឯកឧត្តម លោកជំទាវ លោក លោកស្រី</h1>
+            </div>
         </div>
 
         <button class="btn-open animate-pop" onclick="unlock()">បើកសំបុត្រអញ្ជើញ</button>
     </div>
 
+    <!-- Inside Page -->
     <div class="page-inside" id="inside">
         
         <div id="section-main"></div>
         
-        <div class="animate-pop" style="width: 100%; max-width: 500px; margin: 20px auto; text-align: center;">
-            <img src="https://lh3.googleusercontent.com/u/0/d/1wpMQx78FBAfNpVAjaUPA4jEVXJg5oYNS" alt="Wedding Invitation" style="width: 100%; height: auto; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-        </div>
-        <div style="width: 100%; max-width: 500px; margin: 40px auto; text-align: center;">
-            <img src="https://lh3.googleusercontent.com/u/0/d/1SrjCwOJ3Ri7JjBDfkaSOSHqfMAbNcpdm" alt="Wedding Invitation" style="width: 100%; height: auto; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+        <div class="invitation-cards-wrapper animate-pop">
+            <div class="invitation-card-item">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1wpMQx78FBAfNpVAjaUPA4jEVXJg5oYNS" alt="Wedding Invitation Page 1">
+            </div>
+            
+            <hr class="card-divider">
+
+            <div class="invitation-card-item">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1SrjCwOJ3Ri7JjBDfkaSOSHqfMAbNcpdm" alt="Wedding Invitation Page 2">
+            </div>
+
+            <hr class="card-divider">
+
+            <div class="invitation-card-item">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1wUmzDJmqCk3DEQd8VkxNnrwFP7SxVnG4" alt="Wedding Invitation Page 3">
+            </div>
         </div>
 
         <div class="save-date-container">
@@ -419,19 +520,11 @@
             <div class="section-title">រូបថតអនុស្សាវរីយ៍ | GALLERY</div>
             <div class="gallery-container">
                 <div class="gallery" id="flip-gallery">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1OkzcnAAL7Z6O0b6nyHkw-IbRbBHTD4Le?w=600" alt="Gallery 1">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/145TpedeHjQr2LrCPvv42Dq7cDhMt7xNz?w=600" alt="Gallery 2">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1kDrJrDyyu1Bbv9mx4pYkzfrod_34zdr_?w=600" alt="Gallery 3">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1iwQxVTFGEuD46PS9DYTup2cj4rXl_skV?w=600" alt="Gallery 4">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1euMWQz27nJ9dxGsmN3rBVb_MGBlwB6Jc?w=600" alt="Gallery 5">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1F_nnMUT7I32w5s5REgqyfofTafkybv_J?w=600" alt="Gallery 6">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1nIYySe_dKiGZf73hdmA4RMCWO7jvLr6j?w=600" alt="Gallery 7">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1JpmiY2T-s3V6kcA_RcvTRe5LtWKUVKi2?w=600" alt="Gallery 8">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1lePBvPmZJXPUkw7C3A9UX7YpdYtX1aMr?w=600" alt="Gallery 9">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1jd6P5tviseyNNSJ34uETYSA2rD-h95nJ?w=600" alt="Gallery 10">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1adEXBstf_MU3sYAbX5qCj3dT8nf-8l3y?w=600" alt="Gallery 11">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1tVcf5MaduES_NrUDRyc9-n3XdUNfD6MS?w=600" alt="Gallery 12">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1T279GE1hv-diaf26tr7rr_ff3FlTTBjx?w=600" alt="Gallery 13">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1OkzcnAAL7Z6O0b6nyHkw-IbRbBHTD4Le" alt="Gallery 1">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/145TpedeHjQr2LrCPvv42Dq7cDhMt7xNz" alt="Gallery 2">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1kDrJrDyyu1Bbv9mx4pYkzfrod_34zdr_" alt="Gallery 3">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1iwQxVTFGEuD46PS9DYTup2cj4rXl_skV" alt="Gallery 4">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1euMWQz27nJ9dxGsmN3rBVb_MGBlwB6Jc" alt="Gallery 5">
                 </div>
             </div>
             <p style="font-family:'Dangrek'; font-size:0.8rem; color:var(--gold);">* ចុចលើរូបដើម្បីមើលធំ</p>
@@ -453,7 +546,7 @@
             createGlobalFlyingElements();
             createSparkles();
             initFlipBook(); 
-            loadAllWishes(); // ទាញយកសារជូនពរមកបង្ហាញ
+            loadAllWishes();
         }
 
         function createGlobalFlyingElements() {
@@ -570,7 +663,7 @@
             }
         }
 
-        /* RSVP & Google Sheets Integration with Lock Check */
+        /* RSVP & Google Sheets Integration */
         function sendToSheet(message) {
             const name = document.getElementById('g-name').value || "ភ្ញៀវកិត្តិយស";
             const status = document.getElementById('rsvp-status-new').value;
@@ -583,7 +676,6 @@
                 return;
             }
 
-            // ការពារមិនឱ្យផ្ញើរសារ ឬបញ្ជាក់ซ้ำ ប្រសិនបើធ្លាប់បានផ្ញើរួច
             if (localStorage.getItem('wedding_rsvp_sent') === 'true') {
                 alert("អ្នកបានបញ្ជាក់ការចូលរួម ឬផ្ញើសារជូនពររួចរាល់ម្ដងរួចទៅហើយ!");
                 lockRsvpForm();
@@ -599,12 +691,10 @@
 
             fetch(finalURL, { mode: 'no-cors' })
             .then(() => {
-                // រក្សាទុកស្ថានភាពក្នុង Browser ថាបានផ្ញើរួច
                 localStorage.setItem('wedding_rsvp_sent', 'true');
-                
                 alert(message);
                 lockRsvpForm();
-                loadAllWishes(); // ទាញយកទិន្នន័យមកបង្ហាញឡើងវិញក្រោយបញ្ជូនរួច
+                loadAllWishes();
             })
             .catch(error => {
                 console.error('Error!', error.message);
@@ -637,7 +727,6 @@
 
         function setW(t) { document.getElementById('w-msg').value = t; }
 
-        /* Load all wishes from Google Sheets to display for other guests */
         function loadAllWishes() {
             fetch(scriptURL)
             .then(response => response.json())
@@ -650,7 +739,6 @@
                     return;
                 }
 
-                // បង្ហាញសារជូនពរទាំងអស់ដែលទាញបានពី Sheet
                 data.forEach(item => {
                     if (item.wish && item.wish.trim() !== "") {
                         const d = document.createElement('div');
@@ -698,7 +786,6 @@
             initEffects();
             getGuestName();
 
-            // ពិនិត្យពេលបើកមកវិញ ប្រសិនបើធ្លាប់ផ្ញើរួចហើយ ធ្វើការ Lock ភ្លាម
             if (localStorage.getItem('wedding_rsvp_sent') === 'true') {
                 lockRsvpForm();
                 const wishBox = document.querySelector('.wish-box');
