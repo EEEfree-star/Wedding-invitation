@@ -218,7 +218,7 @@
             display: none;
             flex-direction: column;
             align-items: center;
-            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('https://lh3.googleusercontent.com/u/0/d/1BiMXeaalYRS4ifhUm2OhK3Z9lpShc7M4') no-repeat center;
+            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('https://lh3.googleusercontent.com/u/0/d/1iN3cr8CVTkRp7-B0wr-Xhf2JyQeHPVL5') no-repeat center;
             background-size: cover;
             background-position: center;
             background-attachment: scroll;
@@ -348,14 +348,32 @@
 
         /* ================= GUEST NAME POSITIONING ================= */
         .guest-name-box {
-            position: absolute;  
-            left: 50%;           
-            transform: translateX(-50%); 
-            top: 69%;            /* កែប្រែ % ត្រង់នេះដើម្បីរំកិលឈ្មោះភ្ញៀវចុះក្រោម/ឡើងលើ */
-            width: 80%;          
-            text-align: center;
-            z-index: 10;
-        }
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 70%;
+    width: 88%;                     /* ទទឹងប្រអប់ស្មើតាមរូប ៨០% */
+    max-width: 360px;               /* កំណត់ទំហំអតិបរមាកុំឱ្យរីកធំពេកលើ Tablet */
+    box-sizing: border-box;         /* ធានាថា padding មិនធ្វើឱ្យរីកប្រអប់ */
+    text-align: center;
+    word-wrap: break-word;
+    z-index: 10;
+
+    /* 🎨 ស៊ុម និងផ្ទៃប្រអប់ */
+    background: rgba(255, 255, 255, 0.92);
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    padding: 6px 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+/* 🚫 បង្ខំឱ្យឈ្មោះភ្ញៀវនៅតែ ១ ជួរគត់ មិនឱ្យចុះ ២ ជួរឡើយ */
+    white-space: nowrap;            /* ហាមចុះបន្ទាត់ */
+    overflow: hidden;               /* លាក់ផ្នែកដែលលើស */
+    text-overflow: ellipsis;        /* បើវែងជ្រុលខ្លាំង វានឹងបង្ហាញ (...) នៅខាងចុងជំនួសឱ្យការធ្លាយចេញ */
+
+    /* 🔤 កំណត់ទំហំអក្សរឱ្យថេរគ្រប់ទូរស័ព្ទ (Dynamic Font Size) */
+    font-size: clamp(11px, 3,5vw, 15px); /* ទំហំអប្បបរមា 14px, ផ្លាស់ប្តូរតាមអេក្រង់ 4vw, អតិបរមា 18px */
+    line-height: 1.2;
+}
         
         .guest-highlight { 
             font-family: 'Moul', cursive; 
@@ -420,7 +438,7 @@
         
         <div class="cover-card-item animate-pop">
             <!-- រូបភាព Cover មេ -->
-            <img src="https://lh3.googleusercontent.com/u/0/d/1m2SF1w-oTZb9j8QehWIcjaw0SdS_ctWN" alt="Wedding Invitation Cover">
+            <img src="https://lh3.googleusercontent.com/u/0/d/1iN3cr8CVTkRp7-B0wr-Xhf2JyQeHPVL5" alt="Wedding Invitation Cover">
             
             <!-- ឈ្មោះភ្ញៀវស្ថិតនៅលើរូបភាព Cover -->
             <div class="guest-name-box">
@@ -438,19 +456,19 @@
         
         <div class="invitation-cards-wrapper animate-pop">
             <div class="invitation-card-item">
-                <img src="https://lh3.googleusercontent.com/u/0/d/1wpMQx78FBAfNpVAjaUPA4jEVXJg5oYNS" alt="Wedding Invitation Page 1">
+                <img src="https://lh3.googleusercontent.com/u/0/d/10s9LSJGtgOXZT9ddmjtCVo0DU5h8WX6u" alt="Wedding Invitation Page 1">
             </div>
             
             <hr class="card-divider">
 
             <div class="invitation-card-item">
-                <img src="https://lh3.googleusercontent.com/u/0/d/1SrjCwOJ3Ri7JjBDfkaSOSHqfMAbNcpdm" alt="Wedding Invitation Page 2">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1kVdQxH2wJychK-VUCNP6GmtDqFl168bf" alt="Wedding Invitation Page 2">
             </div>
 
             <hr class="card-divider">
 
             <div class="invitation-card-item">
-                <img src="https://lh3.googleusercontent.com/u/0/d/1wUmzDJmqCk3DEQd8VkxNnrwFP7SxVnG4" alt="Wedding Invitation Page 3">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1v3O2xJGsYkQlM-HkeSpydgfvG2QEUGJf" alt="Wedding Invitation Page 3">
             </div>
         </div>
 
@@ -525,6 +543,15 @@
                     <img src="https://lh3.googleusercontent.com/u/0/d/1kDrJrDyyu1Bbv9mx4pYkzfrod_34zdr_" alt="Gallery 3">
                     <img src="https://lh3.googleusercontent.com/u/0/d/1iwQxVTFGEuD46PS9DYTup2cj4rXl_skV" alt="Gallery 4">
                     <img src="https://lh3.googleusercontent.com/u/0/d/1euMWQz27nJ9dxGsmN3rBVb_MGBlwB6Jc" alt="Gallery 5">
+					<img src="https://lh3.googleusercontent.com/u/0/d/1F_nnMUT7I32w5s5REgqyfofTafkybv_J?w=600" alt="Gallery 6">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1nIYySe_dKiGZf73hdmA4RMCWO7jvLr6j?w=600" alt="Gallery 7">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1JpmiY2T-s3V6kcA_RcvTRe5LtWKUVKi2?w=600" alt="Gallery 8">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1lePBvPmZJXPUkw7C3A9UX7YpdYtX1aMr?w=600" alt="Gallery 9">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1jd6P5tviseyNNSJ34uETYSA2rD-h95nJ?w=600" alt="Gallery 10">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1adEXBstf_MU3sYAbX5qCj3dT8nf-8l3y?w=600" alt="Gallery 11">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1tVcf5MaduES_NrUDRyc9-n3XdUNfD6MS?w=600" alt="Gallery 12">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1T279GE1hv-diaf26tr7rr_ff3FlTTBjx?w=600" alt="Gallery 13">
+
                 </div>
             </div>
             <p style="font-family:'Dangrek'; font-size:0.8rem; color:var(--gold);">* ចុចលើរូបដើម្បីមើលធំ</p>
