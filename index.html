@@ -4,14 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SokHieng&Ratha-Wedding</title>
-    <meta property="https://lh3.googleusercontent.com/u/0/d/1BiMXeaalYRS4ifhUm2OhK3Z9lpShc7M4" content="សំបុត្រអញ្ជើញមង្គលការ - សុខអៀង & រដ្ឋា">
+    
+    <!-- Open Graph & Meta Data -->
+    <meta property="og:title" content="សំបុត្រអញ្ជើញមង្គលការ - សុខអៀង & រដ្ឋា">
     <meta property="og:description" content="សូមគោរពអញ្ជើញចូលរួមជាកិត្តិយសក្នុងពិធីសិរីមង្គលអាពាហ៍ពិពាហ៍ នៅថ្ងៃទី ២៩ ខែ មករា ឆ្នាំ ២០២៧">
     <meta property="og:image" content="https://lh3.googleusercontent.com/u/0/d/1OkzcnAAL7Z6O0b6nyHkw-IbRbBHTD4Le">
     <meta property="og:type" content="website">
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Moul&family=Kantumruy+Pro:wght@400;700&family=Dangrek&display=swap" rel="stylesheet">
 
     <style>
-        /* 1. Global Variables & Base Styles */
+        /* =========================================================
+           1. GLOBAL VARIABLES & BASE STYLES
+           ========================================================= */
         :root {
             --rose: #c94b63;
             --gold: #b8860b;
@@ -32,7 +38,9 @@
             overflow-x: hidden;
         }
 
-        /* 2. Animations */
+        /* =========================================================
+           2. KEYFRAME ANIMATIONS
+           ========================================================= */
         @keyframes popIn {
             0% { transform: scale(0); opacity: 0; }
             70% { transform: scale(1.1); }
@@ -58,7 +66,15 @@
             100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
         }
 
-        /* 3. Global Decorative Elements */
+        /* Animation សម្រាប់ឈ្មោះភ្ញៀវវែង (រត់ពីស្តាំមកឆ្វេង) */
+        @keyframes marqueeScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* =========================================================
+           3. BACKGROUND & DECORATIVE ELEMENTS
+           ========================================================= */
         #global-flying-container {
             position: fixed;
             top: 0;
@@ -88,7 +104,9 @@
             z-index: 1;
         }
 
-        /* 4. Navigation & Controls */
+        /* =========================================================
+           4. NAVIGATION & CONTROLS
+           ========================================================= */
         .bottom-nav {
             position: fixed;
             bottom: 20px;
@@ -137,9 +155,9 @@
             cursor: pointer;
         }
 
-        /* 5. Page Layouts (រចនាបថទំព័រទី១ ឱ្យដូចទំព័រទី២) */
- /* ✅ កូដថ្មីដែលត្រូវដាក់ជំនួស (ធ្វើឱ្យរូបពេញ Screen ស្វ័យប្រវត្តិ) */
-
+        /* =========================================================
+           5. PAGE COVER (ទំព័រទី មួយ)
+           ========================================================= */
         .page-cover {
             height: 100vh;
             height: 100dvh;
@@ -159,8 +177,8 @@
         .cover-card-item {
             width: 100%;
             max-width: 450px;
-            height: 78vh;
-            height: 78dvh;
+            height: auto;
+            aspect-ratio: 9 / 16;
             background: #ffffff;
             padding: 8px;
             border-radius: 18px;
@@ -176,9 +194,81 @@
         .cover-card-item img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: 12px;
             display: block;
+        }
+
+        .btn-open {
+            padding: 12px 35px;
+            background: linear-gradient(45deg, var(--rose), #ff85a2);
+            color: white;
+            border-radius: 50px;
+            border: 2px solid #fff;
+            font-family: 'Moul';
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(201, 75, 99, 0.4);
+            z-index: 100;
+            position: relative;
+            margin-top: -38px; /* រំកិលប៊ូតុងឡើងលើ 1cm */
+        }
+
+        /* =========================================================
+           6. GUEST NAME BOX & ANIMATIONS (ប្រអប់ឈ្មោះភ្ញៀវ)
+           ========================================================= */
+        .guest-name-box {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 25%;                    /* ទីតាំងថេរធៀបនឹងបាតក្រោម */
+            width: 85%;
+            max-width: 350px;
+            box-sizing: border-box;
+            z-index: 10;
+
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            padding: 6px 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .guest-name-text {
+            display: inline-block;
+            white-space: nowrap;
+            font-family: 'Moul', cursive;
+            font-size: clamp(11px, 3.5vw, 15px);
+            color: var(--gold);
+            line-height: 1.4;
+        }
+
+        .scroll-active {
+            animation: marqueeScroll 8s linear infinite;
+            padding-left: 100%;
+        }
+
+        /* =========================================================
+           7. PAGE INSIDE (ទំព័រទី ពីរ)
+           ========================================================= */
+        .page-inside {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), 
+                        url('https://lh3.googleusercontent.com/u/0/d/1iN3cr8CVTkRp7-B0wr-Xhf2JyQeHPVL5') no-repeat center;
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll;
+            min-height: 100vh;
+            width: 100%;
+            padding: 25px 15px 120px 15px;
+            text-align: center;
         }
 
         .invitation-cards-wrapper {
@@ -192,71 +282,7 @@
 
         .invitation-card-item {
             width: 100%;
-            height: 90vh;
-            height: 90dvh;
-            background: #ffffff;
-            padding: 8px;
-            border-radius: 18px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
-            border: 1px solid var(--gold);
-            position: relative;
-            box-sizing: border-box;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .invitation-card-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 12px;
-            display: block;
-        }
-
-        .page-inside {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            background: linear-gradient(rgba(255,255,255,0.85), rgba(255,255,255,0.85)), url('https://lh3.googleusercontent.com/u/0/d/1iN3cr8CVTkRp7-B0wr-Xhf2JyQeHPVL5') no-repeat center;
-            background-size: cover;
-            background-position: center;
-            background-attachment: scroll;
-            min-height: 100vh;
-            width: 100%;
-            padding: 25px 15px 120px 15px;
-            text-align: center;
-        }
-
-        /* 6. Buttons & Components */
-        .btn-open {
-            padding: 12px 35px;
-            background: linear-gradient(45deg, var(--rose), #ff85a2);
-            color: white;
-            border-radius: 50px;
-            border: 2px solid #fff;
-            font-family: 'Moul';
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(201, 75, 99, 0.4);
-            z-index: 100;
-            position: relative;
-	    /*margin-top: -95px;  👈 បន្ថែមជួរនេះដើម្បីទាញប៊ូតុងឡើងលើប្រហែល 1cm */
-        }
-        .section-title { font-family: 'Moul'; font-size: 0.8rem; color: var(--rose); margin-bottom: 15px; text-transform: uppercase; }
-
-        /* 7. Separate Card Layouts for Page Inside */
-        .invitation-cards-wrapper {
-            width: 100%;
-            max-width: 480px;
-            margin: 0px auto;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .invitation-card-item {
-            width: 100%;
-            height: auto;               /* 👈 ប្តូរពី 90dvh មកជា auto វិញ */
+            height: auto;
             background: #ffffff;
             padding: 8px;
             border-radius: 18px;
@@ -269,8 +295,8 @@
         .invitation-card-item img {
             width: 100%;
             height: auto;
-            object-fit: contain;     /* 👈 បង្ហាញរូបពេញ មិនដាច់ជាយឡើយ */
-	    border-radius: 12px;
+            object-fit: contain;
+            border-radius: 12px;
             display: block;
         }
 
@@ -282,7 +308,99 @@
             background: linear-gradient(to right, transparent, var(--gold), transparent);
         }
 
-        /* 8. Gallery System */
+        /* =========================================================
+           8. WISHES, MAP, TIMER & OTHER COMPONENTS
+           ========================================================= */
+        .section-title { 
+            font-family: 'Moul'; 
+            font-size: 0.8rem; 
+            color: var(--rose); 
+            margin-bottom: 15px; 
+            text-transform: uppercase; 
+        }
+
+        .save-date-container { 
+            margin: 40px auto; 
+            width: 100%; 
+            max-width: 480px; 
+            text-align: center; 
+            border-top: 1px dashed var(--gold); 
+            padding-top: 30px; 
+        }
+
+        .save-date-title { font-family: 'Moul'; font-size: 0.8rem; color: var(--rose); margin-bottom: 15px; }
+
+        .btn-calendar { 
+            display: inline-block; 
+            margin-bottom: 30px; 
+            padding: 12px 25px; 
+            background: #34a853; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-family: 'Dangrek'; 
+            font-size: 0.9rem; 
+            border: 2px solid #fff; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
+
+        .wish-box { 
+            background: white; 
+            padding: 25px; 
+            border-radius: 20px; 
+            border: 1px solid var(--gold); 
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); 
+            text-align: left; 
+        }
+
+        .wish-box-title { font-family: 'Moul'; font-size: 0.8rem; color: var(--rose); margin-bottom: 15px; text-align: center; }
+        .wish-box-label { font-family: 'Dangrek'; font-size: 0.8rem; color: var(--rose); }
+
+        .wish-input-text { width: 100%; padding: 12px; margin: 5px 0 15px 0; border-radius: 10px; border: 1px solid #ddd; font-family: 'Kantumruy Pro'; }
+        .wish-select { width: 100%; padding: 12px; margin: 5px 0 15px 0; border-radius: 10px; border: 1px solid var(--gold); font-family: 'Dangrek'; background: white; }
+        .wish-chips-wrap { display: flex; flex-wrap: wrap; justify-content: center; margin: 5px 0 10px 0; }
+        
+        .wish-chip {
+            padding: 6px 12px;
+            background: #fff;
+            border: 1px solid var(--rose);
+            border-radius: 15px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            color: var(--rose);
+            font-family: 'Dangrek';
+            margin: 3px;
+        }
+
+        .wish-textarea { width: 100%; height: 80px; padding: 12px; border-radius: 10px; border: 1px solid #ddd; font-family: 'Kantumruy Pro'; margin-bottom: 20px; }
+        
+        .btn-submit { 
+            width: 100%; 
+            padding: 15px; 
+            background: linear-gradient(45deg, var(--rose), #ff85a2); 
+            color: white; 
+            border-radius: 50px; 
+            border: 2px solid #fff; 
+            font-family: 'Moul'; 
+            cursor: pointer; 
+            box-shadow: 0 4px 15px rgba(201, 75, 99, 0.4); 
+            transition: all 0.3s ease; 
+        }
+
+        .wall-container { margin-top: 20px; text-align: left; }
+        .wish-post-item { background: #fff5f6; padding: 10px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid var(--rose); font-size: 0.85rem; }
+
+        .section-map-container { margin-top: 40px; width: 100%; }
+        .map-card { background: white; padding: 15px; border-radius: 15px; border: 1px solid var(--gold); max-width: 480px; margin: 0 auto; }
+        .btn-map { display: inline-block; padding: 10px 25px; background: var(--gold); color: white; text-decoration: none; border-radius: 20px; font-family: 'Dangrek'; }
+
+        .timer-container { margin-top: 40px; }
+        .timer-flex { display: flex; justify-content: center; gap: 8px; }
+        .timer-item { background: white; padding: 10px; border-radius: 10px; border: 1px solid var(--gold); min-width: 60px; }
+        .timer-num { font-family: 'Dangrek'; font-size: 1.2rem; color: var(--rose); }
+
+        /* Gallery System */
+        .gallery-section { margin-top: 40px; width: 100%; }
         .gallery-container {
             width: 100%;
             height: 400px;
@@ -293,6 +411,7 @@
             align-items: center;
             overflow: visible;
         }
+
         .gallery {
             width: 220px;
             height: 300px;
@@ -301,6 +420,7 @@
             transform: translateX(0px);
             transition: transform 1s;
         }
+
         .gallery img {
             position: absolute;
             width: 100%;
@@ -317,13 +437,14 @@
             top: 0;
         }
 
-        /* 9. Lightbox */
+        /* Lightbox */
         .lightbox {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95);
             display: none; z-index: 2000;
             justify-content: center; align-items: center;
         }
+
         .lightbox img { max-width: 90%; max-height: 80%; border-radius: 8px; border: 3px solid white; }
         .lb-close { position: absolute; top: 20px; right: 25px; color: white; font-size: 40px; cursor: pointer; }
         .lb-prev, .lb-next {
@@ -332,90 +453,20 @@
         }
         .lb-prev { left: 0; }
         .lb-next { right: 0; }
-
-        /* 10. Wish Section Components */
-        .wish-chip {
-            padding: 6px 12px;
-            background: #fff;
-            border: 1px solid var(--rose);
-            border-radius: 15px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            color: var(--rose);
-            font-family: 'Dangrek';
-            margin: 3px;
-        }
-
-        /* ================= GUEST NAME POSITIONING ================= */
-        .guest-name-box {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 70%;
-    width: 88%;                     /* ទទឹងប្រអប់ស្មើតាមរូប ៨០% */
-    max-width: 360px;               /* កំណត់ទំហំអតិបរមាកុំឱ្យរីកធំពេកលើ Tablet */
-    box-sizing: border-box;         /* ធានាថា padding មិនធ្វើឱ្យរីកប្រអប់ */
-    text-align: center;
-    word-wrap: break-word;
-    z-index: 10;
-
-    /* 🎨 ស៊ុម និងផ្ទៃប្រអប់ */
-    background: rgba(255, 255, 255, 0.92);
-    border: 2px solid var(--gold);
-    border-radius: 10px;
-    padding: 6px 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-/* 🚫 បង្ខំឱ្យឈ្មោះភ្ញៀវនៅតែ ១ ជួរគត់ មិនឱ្យចុះ ២ ជួរឡើយ */
-    white-space: nowrap;            /* ហាមចុះបន្ទាត់ */
-    overflow: hidden;               /* លាក់ផ្នែកដែលលើស */
-    text-overflow: ellipsis;        /* បើវែងជ្រុលខ្លាំង វានឹងបង្ហាញ (...) នៅខាងចុងជំនួសឱ្យការធ្លាយចេញ */
-
-    /* 🔤 កំណត់ទំហំអក្សរឱ្យថេរគ្រប់ទូរស័ព្ទ (Dynamic Font Size) */
-    font-size: clamp(11px, 3,5vw, 15px); /* ទំហំអប្បបរមា 14px, ផ្លាស់ប្តូរតាមអេក្រង់ 4vw, អតិបរមា 18px */
-    line-height: 1.2;
-}
-        
-        .guest-highlight { 
-            font-family: 'Moul', cursive; 
-            font-size: 1.0rem;   
-            color: #b8860b;      
-            margin: 0;
-            line-height: 1.4;
-            text-shadow: none;   
-        }
-
-        .save-date-container { margin: 40px auto; width: 100%; max-width: 480px; text-align: center; border-top: 1px dashed #b8860b; padding-top: 30px; }
-        .save-date-title { font-family: 'Moul'; font-size: 0.8rem; color: #c94b63; margin-bottom: 15px; }
-        .btn-calendar { display: inline-block; margin-bottom: 30px; padding: 12px 25px; background: #34a853; color: white; text-decoration: none; border-radius: 50px; font-family: 'Dangrek'; font-size: 0.9rem; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .wish-box { background: white; padding: 25px; border-radius: 20px; border: 1px solid #b8860b; box-shadow: 0 5px 20px rgba(0,0,0,0.05); text-align: left; }
-        .wish-box-title { font-family: 'Moul'; font-size: 0.8rem; color: #c94b63; margin-bottom: 15px; text-align: center; }
-        .wish-box-label { font-family: 'Dangrek'; font-size: 0.8rem; color: #c94b63; }
-        .wish-input-text { width: 100%; padding: 12px; margin: 5px 0 15px 0; border-radius: 10px; border: 1px solid #ddd; font-family: 'Kantumruy Pro'; }
-        .wish-select { width: 100%; padding: 12px; margin: 5px 0 15px 0; border-radius: 10px; border: 1px solid #b8860b; font-family: 'Dangrek'; background: white; }
-        .wish-chips-wrap { display: flex; flex-wrap: wrap; justify-content: center; margin: 5px 0 10px 0; }
-        .wish-textarea { width: 100%; height: 80px; padding: 12px; border-radius: 10px; border: 1px solid #ddd; font-family: 'Kantumruy Pro'; margin-bottom: 20px; }
-        .btn-submit { width: 100%; padding: 15px; background: linear-gradient(45deg, #c94b63, #ff85a2); color: white; border-radius: 50px; border: 2px solid #fff; font-family: 'Moul'; cursor: pointer; box-shadow: 0 4px 15px rgba(201, 75, 99, 0.4); transition: all 0.3s ease; }
-        .wall-container { margin-top: 20px; text-align: left; }
-        .section-map-container { margin-top: 40px; width: 100%; }
-        .map-card { background: white; padding: 15px; border-radius: 15px; border: 1px solid var(--gold); max-width: 480px; margin: 0 auto; }
-        .btn-map { display: inline-block; padding: 10px 25px; background: var(--gold); color: white; text-decoration: none; border-radius: 20px; font-family: 'Dangrek'; }
-        .timer-container { margin-top: 40px; }
-        .timer-flex { display: flex; justify-content: center; gap: 8px; }
-        .timer-item { background: white; padding: 10px; border-radius: 10px; border: 1px solid var(--gold); min-width: 60px; }
-        .timer-num { font-family: 'Dangrek'; font-size: 1.2rem; color: var(--rose); }
-        .gallery-section { margin-top: 40px; width: 100%; }
-        .wish-post-item { background: #fff5f6; padding: 10px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid var(--rose); font-size: 0.85rem; }
     </style>
 </head>
 <body>
 
+    <!-- Flying Elements Container -->
     <div id="global-flying-container"></div>
     
+    <!-- Audio Elements -->
     <audio id="music" loop preload="auto">
         <source src="https://github.com/EEEfree-star/Wedding-invitation/raw/refs/heads/main/Music03.mp3" type="audio/mpeg">
     </audio>
     <div class="music-btn" onclick="toggleM()">🔊</div>
 
+    <!-- Navigation Bar -->
     <div class="bottom-nav" id="menu">
         <a onclick="goBack()" class="nav-item"><span>🏠</span>ត្រឡប់ដើម</a>
         <a href="#section-main" class="nav-item"><span>📅</span>កម្មវិធី</a>
@@ -425,6 +476,7 @@
         <a href="#section-wish" class="nav-item"><span>✍️</span>សារជូនពរ</a>
     </div>
 
+    <!-- Lightbox Modal -->
     <div id="lightbox" class="lightbox">
         <span class="lb-close" onclick="closeLB()">×</span>
         <span class="lb-prev" onclick="changeImg(-1)">❮</span>
@@ -432,17 +484,15 @@
         <span class="lb-next" onclick="changeImg(1)">❯</span>
     </div>
 
-    <!-- Cover Page (ទម្រង់ Card ដូចទំព័រទី២) -->
+    <!-- Cover Page -->
     <div class="page-cover" id="cover">
         <div id="sparkle-container"></div>
         
         <div class="cover-card-item animate-pop">
-            <!-- រូបភាព Cover មេ -->
-            <img src="https://lh3.googleusercontent.com/u/0/d/1ssGJLKVQY3gtdPz9zcYDwsRgKlxSIOEK" alt="Wedding Invitation Cover">
+            <img src="https://lh3.googleusercontent.com/u/0/d/1ssGJLKVQY3gtdPz9zcYDwsRgKlxSIOEK?w=600" alt="Wedding Invitation Cover">
             
-            <!-- ឈ្មោះភ្ញៀវស្ថិតនៅលើរូបភាព Cover -->
             <div class="guest-name-box">
-                <h1 id="guest-display" class="guest-highlight">ឯកឧត្តម លោកជំទាវ លោក លោកស្រី</h1>
+                <span id="guest-display" class="guest-name-text">ឯកឧត្តម លោកជំទាវ លោក លោកស្រី</span>
             </div>
         </div>
 
@@ -456,28 +506,28 @@
         
         <div class="invitation-cards-wrapper animate-pop">
             <div class="invitation-card-item">
-                <img src="https://lh3.googleusercontent.com/u/0/d/10s9LSJGtgOXZT9ddmjtCVo0DU5h8WX6u" alt="Wedding Invitation Page 1">
+                <img src="https://lh3.googleusercontent.com/u/0/d/10s9LSJGtgOXZT9ddmjtCVo0DU5h8WX6u?w=600" alt="Wedding Invitation Page 1">
             </div>
             
             <hr class="card-divider">
 
             <div class="invitation-card-item">
-                <img src="https://lh3.googleusercontent.com/u/0/d/1kVdQxH2wJychK-VUCNP6GmtDqFl168bf" alt="Wedding Invitation Page 2">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1kVdQxH2wJychK-VUCNP6GmtDqFl168bf?w=600" alt="Wedding Invitation Page 2">
             </div>
 
             <hr class="card-divider">
 
             <div class="invitation-card-item">
-                <img src="https://lh3.googleusercontent.com/u/0/d/1v3O2xJGsYkQlM-HkeSpydgfvG2QEUGJf" alt="Wedding Invitation Page 3">
+                <img src="https://lh3.googleusercontent.com/u/0/d/1v3O2xJGsYkQlM-HkeSpydgfvG2QEUGJf?w=600" alt="Wedding Invitation Page 3">
             </div>
-			
 			 <hr class="card-divider">
 
             <div class="invitation-card-item">
-                <img src="https://lh3.googleusercontent.com/u/0/d/1U5EKi8jL3hcwTdRYvyllUYrqp5_oDrtK" alt="Wedding Invitation Page 4">
+                <img src="https://lh3.googleusercontent.com/u/0/d/12uH26yTChGJJ1KNxTJVRDjDXwQfJLyZX?w=600" alt="Wedding Invitation Page 4">
             </div>
         </div>
 
+        <!-- RSVP & Wishes Section -->
         <div class="save-date-container">
             <div class="save-date-title">រក្សាទុកកាលបរិច្ឆេទ | SAVE THE DATE</div>
             
@@ -522,6 +572,7 @@
             </div>
         </div>
 
+        <!-- Location Section -->
         <div id="section-map" class="section-map-container">
             <div class="section-title">ទីតាំងកម្មវិធី | LOCATION</div>
             <div class="map-card">
@@ -530,6 +581,7 @@
             </div>
         </div>
 
+        <!-- Timer Section -->
         <div id="section-timer" class="timer-container">
             <div class="section-title">រាប់ថយក្រោយ | COUNTDOWN</div>
             <div id="timer-display-box" class="timer-flex">
@@ -540,15 +592,16 @@
             </div>
         </div>
 
+        <!-- Gallery Section -->
         <div id="section-gallery" class="gallery-section">
             <div class="section-title">រូបថតអនុស្សាវរីយ៍ | GALLERY</div>
             <div class="gallery-container">
                 <div class="gallery" id="flip-gallery">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1OkzcnAAL7Z6O0b6nyHkw-IbRbBHTD4Le" alt="Gallery 1">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/145TpedeHjQr2LrCPvv42Dq7cDhMt7xNz" alt="Gallery 2">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1kDrJrDyyu1Bbv9mx4pYkzfrod_34zdr_" alt="Gallery 3">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1iwQxVTFGEuD46PS9DYTup2cj4rXl_skV" alt="Gallery 4">
-                    <img src="https://lh3.googleusercontent.com/u/0/d/1euMWQz27nJ9dxGsmN3rBVb_MGBlwB6Jc" alt="Gallery 5">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1OkzcnAAL7Z6O0b6nyHkw-IbRbBHTD4Le?w=600" alt="Gallery 1">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/145TpedeHjQr2LrCPvv42Dq7cDhMt7xNz?w=600" alt="Gallery 2">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1kDrJrDyyu1Bbv9mx4pYkzfrod_34zdr_?w=600" alt="Gallery 3">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1iwQxVTFGEuD46PS9DYTup2cj4rXl_skV?w=600" alt="Gallery 4">
+                    <img src="https://lh3.googleusercontent.com/u/0/d/1euMWQz27nJ9dxGsmN3rBVb_MGBlwB6Jc?w=600" alt="Gallery 5">
 					<img src="https://lh3.googleusercontent.com/u/0/d/1F_nnMUT7I32w5s5REgqyfofTafkybv_J?w=600" alt="Gallery 6">
                     <img src="https://lh3.googleusercontent.com/u/0/d/1nIYySe_dKiGZf73hdmA4RMCWO7jvLr6j?w=600" alt="Gallery 7">
                     <img src="https://lh3.googleusercontent.com/u/0/d/1JpmiY2T-s3V6kcA_RcvTRe5LtWKUVKi2?w=600" alt="Gallery 8">
@@ -565,6 +618,7 @@
 
     </div>
 
+    <!-- Script Section -->
     <script>
         const audio = document.getElementById('music');
         const targetDate = new Date("2027-01-29T17:00:00+07:00").getTime();
@@ -574,7 +628,7 @@
 
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxZY2f1KjbgqFXdFEkkZYO9R29hO9ibQdE_YaL4gL6Ut9I-RdJU0aQOwcfSk60Pfr9F/exec'; 
 
-        /* Initialization */
+        /* 1. Initialization */
         function initEffects() {
             createGlobalFlyingElements();
             createSparkles();
@@ -613,7 +667,7 @@
             }
         }
 
-        /* Gallery Functions */
+        /* 2. Gallery Functions */
         function initFlipBook() {
             const gallery = document.getElementById('flip-gallery');
             const imgs = gallery.querySelectorAll('img');
@@ -660,7 +714,7 @@
             document.getElementById('lb-img').src = galleryImages[currentImgIndex];
         }
 
-        /* Core Controls */
+        /* 3. Core Page Controls */
         function toggleM() { 
             audio.muted = !audio.muted; 
             document.querySelector('.music-btn').innerText = audio.muted ? "🔇" : "🔊"; 
@@ -681,7 +735,7 @@
             window.scrollTo(0, 0);
         }
 
-        /* Guest Management */
+        /* 4. Guest Name & Scroll Logic (មុខងារឈ្មោះរត់) */
         function getGuestName() {
             const urlParams = new URLSearchParams(window.location.search);
             let guestName = urlParams.get('n'); 
@@ -694,9 +748,27 @@
                 const nameInput = document.getElementById('g-name');
                 if (nameInput) nameInput.value = guestName;
             }
+
+            // ពិនិត្យប្រវែងឈ្មោះដើម្បីឱ្យរត់ស្វ័យប្រវត្តិ
+            checkAndScrollName();
         }
 
-        /* RSVP & Google Sheets Integration */
+        function checkAndScrollName() {
+            const box = document.querySelector('.guest-name-box');
+            const textElement = document.getElementById('guest-display');
+            if (!box || !textElement) return;
+
+            // ពិនិត្យមើលថាបើប្រវែងអក្សរ វែងជាងប្រអប់
+            if (textElement.scrollWidth > box.clientWidth) {
+                textElement.classList.add('scroll-active');
+                box.style.justifyContent = 'flex-start';
+            } else {
+                textElement.classList.remove('scroll-active');
+                box.style.justifyContent = 'center';
+            }
+        }
+
+        /* 5. RSVP & Google Sheets Integration */
         function sendToSheet(message) {
             const name = document.getElementById('g-name').value || "ភ្ញៀវកិត្តិយស";
             const status = document.getElementById('rsvp-status-new').value;
@@ -797,6 +869,7 @@
             });
         }
 
+        /* 6. Countdown Timer Logic */
         countdownInterval = setInterval(() => {
             const now = new Date().getTime();
             const diff = targetDate - now;
@@ -815,6 +888,7 @@
             }
         }, 1000);
 
+        /* 7. Unified Window Load Initialization */
         window.onload = function() {
             initEffects();
             getGuestName();
